@@ -33,7 +33,7 @@ _.mixin({
 					if (_.isFile(this.filename)) {
 						this.content = _.jsonParse(_.open(this.filename))[0];
 						// content is static so only check for updates if no review found previously
-						if (this.content.length == 0 && _.fileExpired(this.filename, ONE_DAY))
+						if (!this.content.length && _.fileExpired(this.filename, ONE_DAY))
 							this.get();
 					} else {
 						this.get();
@@ -249,7 +249,7 @@ _.mixin({
 		this.update = function () {
 			this.offset = 0;
 			switch (true) {
-			case this.w < 100 || this.content.length == 0:
+			case this.w < 100 || !this.content.length:
 				this.lines = [];
 				break;
 			case this.fixed:

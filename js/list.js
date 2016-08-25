@@ -479,7 +479,7 @@ _.mixin({
 					panel.console("Last.fm API KEY not set.");
 					break;
 				}
-				if (this.lastfm_mode > 0 && lastfm.username.length == 0) {
+				if (this.lastfm_mode > 0 && !lastfm.username.length) {
 					panel.console("Last.fm Username not set.");
 					break;
 				}

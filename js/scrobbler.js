@@ -44,7 +44,7 @@ _.mixin({
 				return panel.console("Last.fm API KEY not set.");
 			case lastfm.secret.length != 32:
 				return panel.console("Last.fm SECRET not set.");
-			case lastfm.username.length == 0:
+			case !lastfm.username.length:
 				return panel.console("Last.fm Username not set.");
 			case lastfm.sk.length != 32:
 				return panel.console("Last.fm Password not set.");
@@ -94,7 +94,7 @@ _.mixin({
 		this.get = function (method, metadb, p) {
 			if (lastfm.api_key.length != 32)
 				return panel.console("Last.fm API KEY not set.");
-			if (lastfm.username.length == 0)
+			if (!lastfm.username.length)
 				return panel.console("Last.fm Username not set.");
 			var url = lastfm.get_base_url() + "&method=" + method;
 			switch (method) {
@@ -356,7 +356,7 @@ _.mixin({
 		this.update_button = function () {
 			var n = "mono\\appbar.warning.circle.png";
 			switch (true) {
-			case lastfm.username.length == 0:
+			case !lastfm.username.length:
 				var tooltip = "Click to set your username.";
 				break;
 			case lastfm.sk.length != 32:
@@ -377,7 +377,7 @@ _.mixin({
 		this.menu = function () {
 			var m = window.CreatePopupMenu();
 			var working = this.loved_working || this.playcount_working;
-			var flag = working || lastfm.username.length == 0 ? MF_GRAYED : MF_STRING;
+			var flag = working || !lastfm.username.length ? MF_GRAYED : MF_STRING;
 			m.AppendMenuItem(working ? MF_GRAYED : MF_STRING, 1, "Last.fm username...");
 			m.AppendMenuItem(flag, 2, "Last.fm password...");
 			m.AppendMenuSeparator();
