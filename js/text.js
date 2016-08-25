@@ -342,6 +342,8 @@ _.mixin({
 					.map("innerHTML")
 					.stripTags()
 					.value();
+				if (this.content.length && !content.length)
+					return;
 				_.save(JSON.stringify([content]), f);
 				this.artist = "";
 				panel.item_focus_change();
