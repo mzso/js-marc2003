@@ -229,9 +229,6 @@ _.mixin({
 	fbSanitise : function (value) {
 		return value.replace(/[\/\\|:]/g, "-").replace(/\*/g, "x").replace(/"/g, "''").replace(/[<>]/g, "_").replace(/\?/g, "").replace(/(?! )\s/g, "");
 	},
-	mbEscape : function (value) {
-		return value.replace(/[+!(){}\[\]^"~*?:\\\/-]/g, "\\$&");
-	},
 	amTidy : function (value) {
 		return _.tfe("$replace($lower($ascii(" + _.fbEscape(value) + ")), & ,, and ,)", true);
 	},
