@@ -232,10 +232,6 @@ _.mixin({
 				return _.tf(t, this.metadb);
 		}
 		
-		this.console = function (t) {
-			fb.trace(this.name + ": " + t);
-		}
-		
 		this.new_artist_folder = function (t) {
 			var folder = folders.artists + _.fbSanitise(t);
 			_.createFolder(folder);
@@ -262,5 +258,6 @@ _.mixin({
 		this.list_objects = []; // these will be populated automatically
 		this.text_objects = []; // and used inside font_changed
 		window.DlgCode = DLGC_WANTALLKEYS;
+		console.pre = this.name + ": ";
 	}
 });

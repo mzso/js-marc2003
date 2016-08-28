@@ -476,11 +476,11 @@ _.mixin({
 			case "lastfm_info":
 				this.filename = "";
 				if (lastfm.api_key.length != 32) {
-					panel.console("Last.fm API KEY not set.");
+					console.log("Last.fm API KEY not set.");
 					break;
 				}
 				if (this.lastfm_mode > 0 && !lastfm.username.length) {
-					panel.console("Last.fm Username not set.");
+					console.log("Last.fm Username not set.");
 					break;
 				}
 				switch (this.lastfm_mode) {
@@ -648,7 +648,7 @@ _.mixin({
 				break;
 			case "musicbrainz":
 				if (this.mb_id.length != 36)
-					return panel.console("Invalid/missing MBID");
+					return console.log("Invalid/missing MBID");
 				if (this.mb_mode == 0)
 					var url = "https://beta.musicbrainz.org/ws/2/release-group?fmt=json&limit=100&offset=" + this.mb_offset + "&artist=" + this.mb_id;
 				else
@@ -668,13 +668,13 @@ _.mixin({
 						this.success(f);
 						break;
 					case this.xmlhttp.status == 404 && this.mode == "lastfm_info" && this.lastfm_mode == 1:
-						panel.console("Username not found.");
+						console.log("Username not found.");
 						break;
 					case this.xmlhttp.status == 503 && this.mode == "musicbrainz" && this.attempt < 5:
 						window.SetTimeout(this.mb_retry, 1500);
 						break;
 					default:
-						panel.console("HTTP error: " + this.xmlhttp.status);
+						console.log("HTTP error: " + this.xmlhttp.status);
 						this.xmlhttp.responsetext && fb.trace(this.xmlhttp.responsetext);
 						break;
 					}
@@ -708,7 +708,7 @@ _.mixin({
 				case 0: // artist info
 					var data = _.jsonParse(this.xmlhttp.responsetext);
 					if (data.error)
-						return panel.console(data.message);
+						return console.log(data.message);
 					_.save(JSON.stringify(data), f);
 					this.reset();
 					break;
@@ -757,7 +757,7 @@ _.mixin({
 				case 2: // recent tracks
 					var data = _.jsonParse(this.xmlhttp.responsetext);
 					if (data.error)
-						return panel.console(data.message);
+						return console.log(data.message);
 					_.save(JSON.stringify(data), f);
 					this.update();
 					break;
@@ -960,7 +960,7 @@ _.mixin({
 				break;
 			case "musicbrainz":
 				this.mb_retry = _.bind(function () {
-					panel.console("Retrying...");
+					console.log("Retrying...");
 					this.attempt++;
 					this.get();
 				}, this),

@@ -62,6 +62,13 @@ folders.artists = folders.data + "artists\\";
 folders.lastfm = folders.data + "lastfm\\";
 folders.docs = fb.ComponentPath + "docs\\";
 
+var console = {
+	pre : "",
+	log : function (text) {
+		fb.trace(this.pre + text);
+	}
+}
+
 var np_exe = fb.ProfilePath.substring(0, 3) + "Applications\\Notepad++\\notepad++.exe";
 
 var guifx = {
@@ -323,10 +330,7 @@ _.mixin({
 		try {
 			var data = JSON.parse(value);
 		} catch (e) {
-			if (typeof panel == "object")
-				panel.console("JSON.parse error: " + value);
-			else
-				fb.trace("JSON.parse error: " + value);
+			console.log("JSON.parse error: " + value);
 			return [];
 		}
 		return path ? _.get(data, path, []) : data;

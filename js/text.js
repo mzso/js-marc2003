@@ -289,7 +289,7 @@ _.mixin({
 					if (this.xmlhttp.status == 200)
 						this.success(f);
 					else
-						panel.console("HTTP error: " + this.xmlhttp.status);
+						console.log("HTTP error: " + this.xmlhttp.status);
 				}
 			}, this);
 		}
@@ -304,7 +304,7 @@ _.mixin({
 						.map("innerText")
 						.stripTags()
 						.value();
-					panel.console(content.length ? "A review was found and saved." : "No review was found on the page for this album.");
+					console.log(content.length ? "A review was found and saved." : "No review was found on the page for this album.");
 					_.save(JSON.stringify([content]), f);
 					this.artist = "";
 					panel.item_focus_change();
@@ -325,14 +325,14 @@ _.mixin({
 							}, this)
 							.value();
 						if (this.allmusic_url.length) {
-							panel.console("A page was found for " + _.q(this.album) + ". Now checking for review...");
+							console.log("A page was found for " + _.q(this.album) + ". Now checking for review...");
 							this.get();
 						} else {
-							panel.console("Could not match artist/album on the Allmusic website.");
+							console.log("Could not match artist/album on the Allmusic website.");
 							_.save(JSON.stringify([""]), f);
 						}
 					} catch (e) {
-						panel.console("Could not parse Allmusic server response.");
+						console.log("Could not parse Allmusic server response.");
 					}
 				}
 				break;

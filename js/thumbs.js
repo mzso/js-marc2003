@@ -522,7 +522,7 @@ _.mixin({
 					if (this.xmlhttp.status == 200)
 						this.success(base);
 					else
-						panel.console("HTTP error: " + this.xmlhttp.status);
+						console.log("HTTP error: " + this.xmlhttp.status);
 				}
 			}, this);
 		}
